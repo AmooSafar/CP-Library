@@ -18,16 +18,16 @@
 
 namespace SubtreeLinkCutTree {
 
-	template<typename T, typename Info, typename Lazy> // node Value, Info, Lazy
+	template<typename Type, typename Info, typename Lazy> // node Value, Info, Lazy
 	struct SplayTree {
 		Info info[2]; // 0 aux, 1 all_sub - aux 
 		Lazy lz[2]; // 0 aux, 1 all_sub - aux
 		SplayTree* par;
 		SplayTree* ch[5]; // aux. L, aux. R, p.p. L, p.p R, p.p tree root
 		int id;
-		T val; // node number,  current value
+		Type val; // node number,  current value
 		int rev; // lz of reverse of aux.
-		SplayTree(int _id, T v){
+		SplayTree(int _id, Type v){
 			par = NULL;
 			for(int i = 0; i < 5; i++) ch[i] = NULL;
 			id = _id;
@@ -167,12 +167,12 @@ namespace SubtreeLinkCutTree {
 		}
 	};
 
-	template<typename T, typename Info, typename Lazy>
+	template<typename Type, typename Info, typename Lazy>
 	struct LinkCutTree {
-		using Splay = SplayTree<T, Info, Lazy>;
+		using Splay = SplayTree<Type, Info, Lazy>;
 		vector<Splay*> ver;
 		int n;
-		LinkCutTree(int _n, vector<T> W) : ver(_n, NULL), n(_n) {
+		LinkCutTree(int _n, vector<Type> W) : ver(_n, NULL), n(_n) {
 			for(int i = 0; i < n; i++) ver[i] = new Splay(i, W[i]);
 		}
 		void Access(int u){
